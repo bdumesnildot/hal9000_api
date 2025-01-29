@@ -153,6 +153,7 @@ export const chatbotApp = new Hono()
       return ctx.json(
         {
           message: "Internal server error",
+          error: e
         },
         500
       )
