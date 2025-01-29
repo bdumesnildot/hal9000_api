@@ -1,0 +1,18 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-env --env-file=.env --allow-net --allow-write --allow-read  --watch src/app.ts",
+    "start": "deno run --allow-env --env-file=.env --allow-net --allow-write --allow-read  src/app.ts",
+    "test": "deno test --allow-env --env-file=.env --allow-net --allow-write --allow-read  "
+  },
+  "imports": {
+    "@ai-sdk/google": "npm:@ai-sdk/google@^1.1.6",
+    "@ai-sdk/openai": "npm:@ai-sdk/openai@^1.1.5",
+    "@hono/zod-validator": "npm:@hono/zod-validator@^0.4.2",
+    "@std/assert": "jsr:@std/assert@1",
+    "ai": "npm:ai@^4.1.9",
+    "hono": "npm:hono@^4.6.19",
+    "ollama-ai-provider": "npm:ollama-ai-provider@^1.2.0",
+    "zod": "npm:zod@^3.24.1",
+    "zod-form-data": "npm:zod-form-data@^2.0.5"
+  }
+}
