@@ -5,6 +5,7 @@
     "test": "deno test --allow-env --env-file=.env --allow-net --allow-write --allow-read  "
   },
   "imports": {
+    "@ai-sdk/anthropic": "npm:@ai-sdk/anthropic@^1.1.5",
     "@ai-sdk/google": "npm:@ai-sdk/google@^1.1.6",
     "@ai-sdk/openai": "npm:@ai-sdk/openai@^1.1.5",
     "@hono/zod-validator": "npm:@hono/zod-validator@^0.4.2",

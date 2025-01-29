@@ -12,6 +12,7 @@ export const env = createEnv({
       SERVICE_KEY: z.string(),
       OPENAI_API_KEY: z.string(),
       GOOGLE_API_KEY: z.string(),
+      ANTHROPIC_API_KEY: z.string(),
   },
   /**
    * What object holds the environment variables at runtime.

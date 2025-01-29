@@ -5,6 +5,7 @@
     "jsr:@std/assert@1": "1.0.11",
     "jsr:@std/async@*": "1.0.10",
     "jsr:@std/internal@^1.0.5": "1.0.5",
+    "npm:@ai-sdk/anthropic@^1.1.5": "1.1.5_zod@3.24.1",
     "npm:@ai-sdk/google@^1.1.6": "1.1.6_zod@3.24.1",
     "npm:@ai-sdk/openai@^1.1.5": "1.1.5_zod@3.24.1",
     "npm:@hono/zod-validator@~0.4.2": "0.4.2_hono@4.6.19_zod@3.24.1",
@@ -31,6 +32,14 @@
     }
   },
   "npm": {
+    "@ai-sdk/anthropic@1.1.5_zod@3.24.1": {
+      "integrity": "sha512-HGs69t2dsHlt+c4nCeUcdx5ojXs25dH8xly88TZZoyjfiCRWjmyjQxiPHZL2ME864a+vEpQSmvn8DgvMFA4p2g==",
+      "dependencies": [
+        "@ai-sdk/provider",
+        "@ai-sdk/provider-utils@2.1.5_zod@3.24.1",
+        "zod"
+      ]
+    },
     "@ai-sdk/google@1.1.6_zod@3.24.1": {
       "integrity": "sha512-W9A2jYbPa8WlqyrLohWncIZ0fGWtyUuxjQNGhhMhlAdA+PZeS2pEy0hFJPr8IRRtxVYfRSbjnTpUrJO/vbcnqA==",
       "dependencies": [
@@ -210,6 +219,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@std/assert@1",
+      "npm:@ai-sdk/anthropic@^1.1.5",
       "npm:@ai-sdk/google@^1.1.6",
       "npm:@ai-sdk/openai@^1.1.5",
       "npm:@hono/zod-validator@~0.4.2",
