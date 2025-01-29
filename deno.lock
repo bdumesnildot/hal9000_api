@@ -8,6 +8,7 @@
     "npm:@ai-sdk/google@^1.1.6": "1.1.6_zod@3.24.1",
     "npm:@ai-sdk/openai@^1.1.5": "1.1.5_zod@3.24.1",
     "npm:@hono/zod-validator@~0.4.2": "0.4.2_hono@4.6.19_zod@3.24.1",
+    "npm:@t3-oss/env-core@0.12": "0.12.0_zod@3.24.1",
     "npm:@types/node@*": "22.5.4",
     "npm:ai@^4.1.9": "4.1.9",
     "npm:hono@^4.6.19": "4.6.19",
@@ -97,6 +98,12 @@
     },
     "@opentelemetry/api@1.9.0": {
       "integrity": "sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg=="
+    },
+    "@t3-oss/env-core@0.12.0_zod@3.24.1": {
+      "integrity": "sha512-lOPj8d9nJJTt81mMuN9GMk8x5veOt7q9m11OSnCBJhwp1QrL/qR+M8Y467ULBSm9SunosryWNbmQQbgoiMgcdw==",
+      "dependencies": [
+        "zod"
+      ]
     },
     "@types/diff-match-patch@1.0.36": {
       "integrity": "sha512-xFdR6tkm0MWvBfO8xXCSsinYxHcqkQUlcHeSpMC2ukzOb6lwQAfDmW+Qt0AvlGd8HpsS28qKsB+oPeJn9I39jg=="
@@ -206,6 +213,7 @@
       "npm:@ai-sdk/google@^1.1.6",
       "npm:@ai-sdk/openai@^1.1.5",
       "npm:@hono/zod-validator@~0.4.2",
+      "npm:@t3-oss/env-core@0.12",
       "npm:ai@^4.1.9",
       "npm:hono@^4.6.19",
       "npm:ollama-ai-provider@^1.2.0",
