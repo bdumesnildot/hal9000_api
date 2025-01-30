@@ -1,5 +1,5 @@
 {
-  "name": "HAL9000",
+  "name": "@mesnil/hal9000",
   "version": "1.0.0",
   "description": "An experimental API built to explore AI capabilities and patterns using modern technologies. This project serves as a playground for testing various AI features and integrations.",
   "main": "src/app.ts",
