@@ -5,7 +5,7 @@ export const env = createEnv({
 
   skipValidation: Deno.env.get("SKIP_ENV_VALIDATION") === "true",
   server: {
-    DENO_ENV: z.enum(["development", "production"]).default("development"),
+    RUNTIME_ENV: z.enum(["development", "production"]).default("development"),
     PORT: z.number().default(8888),
     SERVICE_KEY: z.string(),
     OPENAI_API_KEY: z.string(),

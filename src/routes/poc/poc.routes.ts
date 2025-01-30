@@ -18,7 +18,7 @@ const app = new Hono()
 
       const result = await generateText({
         model:
-          env.DENO_ENV === "development"
+          env.RUNTIME_ENV === "development"
             ? getAiModel("ollama", "llama2:13b")
             : getAiModel("google", "gemini-1.5-flash"),
         messages,
@@ -45,7 +45,7 @@ const app = new Hono()
 
       const { object } = await generateObject({
         model:
-          env.DENO_ENV === "development"
+          env.RUNTIME_ENV === "development"
             ? getAiModel("ollama", "llama2:13b")
             : getAiModel("google", "gemini-1.5-flash"),
         system:
@@ -71,7 +71,7 @@ const app = new Hono()
 
         const { object } = await generateObject({
           model:
-            env.DENO_ENV === "development"
+            env.RUNTIME_ENV === "development"
               ? getAiModel("ollama", "llama2:13b")
               : getAiModel("google", "gemini-1.5-flash"),
           output: "enum",
