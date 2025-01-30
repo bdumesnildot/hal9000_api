@@ -4,7 +4,7 @@ import { z } from "zod"
 
 const envSchema = z.object({
   RUNTIME_ENV: z.enum(["development", "production"]).default("development"),
-  PORT: z.number().default(8888),
+  PORT: z.coerce.number().min(0).max(65536).default(8888),
   SERVICE_KEY: z.string(),
   OPENAI_API_KEY: z.string(),
   GOOGLE_API_KEY: z.string(),
