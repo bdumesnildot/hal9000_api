@@ -1,7 +1,6 @@
 {
   "tasks": {
     "dev": "deno run --allow-env --env-file=.env --allow-net --allow-write --allow-read  --watch src/app.ts",
-    "start": "deno run --allow-env --env-file=.env --allow-net --allow-write --allow-read  src/app.ts",
     "test": "deno test --allow-env --env-file=.env --allow-net --allow-write --allow-read  "
   },
   "imports": {
