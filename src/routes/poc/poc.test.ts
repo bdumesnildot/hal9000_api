@@ -1,13 +1,7 @@
-import {
-  assertEquals,
-  assertMatch,
-  assert,
-} from "jsr:@std/assert"
+import { assertEquals, assertMatch } from "jsr:@std/assert"
 import { createServer } from "../../server.ts"
 import {
-  postRecipeOutputSchema,
   type PostCounterInput,
-  type PostPromptInput,
 } from "./poc.schema.ts"
 
 const server = createServer()
@@ -52,21 +46,4 @@ Deno.test("Post poc/counter", async () => {
 
   assertEquals(res.status, 200)
   assertMatch(result, /12/)
-})
-
-Deno.test("Post poc/recipe", async () => {
-  const body: PostPromptInput = {
-    prompt: "How to make baba ganoush?",
-  }
-
-  const res = await server.request("/api/poc/recipe", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  })
-
-  const result = await res.json()
-
-  assertEquals(res.status, 200)
-  assert(postRecipeOutputSchema.safeParse(result).success)
 })

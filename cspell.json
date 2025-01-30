@@ -52,7 +52,7 @@
       "language": "en,fr"
     }
   ],
-  "import": ["@cspell/dict-fr-fr/cspell-ext.json"],
+  "import": [],
   "ignorePaths": [
   ]
 }

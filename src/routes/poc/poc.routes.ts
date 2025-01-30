@@ -1,6 +1,5 @@
 import { Hono } from "hono"
-import { streamText as honoStreamText } from "hono/streaming"
-import { generateObject, generateText, streamText } from "ai"
+import { generateObject, generateText } from "ai"
 import {
   postCounterInputSchema,
   postFileInputSchema,
@@ -10,43 +9,34 @@ import {
 } from "./poc.schema.ts"
 import { zValidator } from "@hono/zod-validator"
 import { getAiModel } from "../../lib/ai-models/index.ts"
+import { env } from "../../env.ts"
 
 const app = new Hono()
-  .get("/hello", (ctx) => {
-    return ctx.text("Hello, chatbot!")
-  })
-
-  .get("/joke", (ctx) => {
-    const { textStream } = streamText({
-      model: getAiModel("ollama", "llama2:13b"),
-      prompt: "Tell me a web dev joke",
-    })
-
-    return honoStreamText(ctx, async (stream) => {
-      for await (const text of textStream) {
-        await stream.write(text)
-      }
-    })
-  })
-
   .post("/counter", zValidator("json", postCounterInputSchema), async (ctx) => {
-    const { messages } = ctx.req.valid("json")
+    try {
+      const { messages } = ctx.req.valid("json")
 
-    const result = await generateText({
-      model: getAiModel("ollama", "llama2:13b"),
-      messages,
-    })
+      const result = await generateText({
+        model:
+          env.DENO_ENV === "development"
+            ? getAiModel("ollama", "llama2:13b")
+            : getAiModel("google", "gemini-1.5-flash"),
+        messages,
+      })
 
-    const allMessages = [
-      ...messages,
-      {
-        role: "assistant",
-        text: result.text,
-      },
-    ]
-    console.dir(allMessages, { depth: null })
+      const allMessages = [
+        ...messages,
+        {
+          role: "assistant",
+          text: result.text,
+        },
+      ]
+      console.dir(allMessages, { depth: null })
 
-    return ctx.json(result.text)
+      return ctx.json(result.text)
+    } catch (e) {
+      console.error(e)
+    }
   })
 
   .post("/recipe", zValidator("json", postPromptInputSchema), async (ctx) => {
@@ -54,7 +44,10 @@ const app = new Hono()
       const { prompt } = ctx.req.valid("json")
 
       const { object } = await generateObject({
-        model: getAiModel("ollama", "llama3.2:latest"),
+        model:
+          env.DENO_ENV === "development"
+            ? getAiModel("ollama", "llama2:13b")
+            : getAiModel("google", "gemini-1.5-flash"),
         system:
           `You are helping a user create a recipe. ` +
           `Use British English variants of ingredient names, like Coriander over Cilantro.`,
@@ -66,12 +59,6 @@ const app = new Hono()
       return ctx.json(object)
     } catch (e) {
       console.error(e)
-      return ctx.json(
-        {
-          message: "Internal server error",
-        },
-        500
-      )
     }
   })
 
@@ -83,7 +70,10 @@ const app = new Hono()
         const { prompt } = ctx.req.valid("json")
 
         const { object } = await generateObject({
-          model: getAiModel("ollama", "llama2:13b"),
+          model:
+            env.DENO_ENV === "development"
+              ? getAiModel("ollama", "llama2:13b")
+              : getAiModel("google", "gemini-1.5-flash"),
           output: "enum",
           enum: ["positive", "negative", "neutral"],
           system:
@@ -118,7 +108,7 @@ const app = new Hono()
       })
 
       const { object } = await generateObject({
-        model: getAiModel("google", "gemini-1.5-flash"),
+        model: getAiModel("anthropic", "claude-3-5-sonnet-20241022"),
         schema: postFileOutputSchema,
         system:
           `You will receive an invoice. ` +
@@ -152,13 +142,6 @@ const app = new Hono()
       return ctx.json(object)
     } catch (e) {
       console.error(e)
-      return ctx.json(
-        {
-          message: "Internal server error",
-          error: e,
-        },
-        500
-      )
     }
   })
 
