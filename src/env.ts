@@ -18,7 +18,7 @@ const loadedEnv = await load({
 })
 
 const parsedEnv = envSchema.safeParse(
-  Deno.env.get("RUNTIME_ENV") === "prod"
+  Deno.env.get("RUNTIME_ENV") === "production"
     ? {
         RUNTIME_ENV: Deno.env.get("RUNTIME_ENV"),
         PORT: Deno.env.get("PORT"),
