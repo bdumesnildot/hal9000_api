@@ -4,12 +4,13 @@
     "jsr:@std/assert@*": "1.0.11",
     "jsr:@std/assert@1": "1.0.11",
     "jsr:@std/async@*": "1.0.10",
+    "jsr:@std/dotenv@*": "0.225.3",
+    "jsr:@std/dotenv@~0.225.3": "0.225.3",
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "npm:@ai-sdk/anthropic@^1.1.5": "1.1.5_zod@3.24.1",
     "npm:@ai-sdk/google@^1.1.6": "1.1.6_zod@3.24.1",
     "npm:@ai-sdk/openai@^1.1.5": "1.1.5_zod@3.24.1",
     "npm:@hono/zod-validator@~0.4.2": "0.4.2_hono@4.6.19_zod@3.24.1",
-    "npm:@t3-oss/env-core@0.12": "0.12.0_zod@3.24.1",
     "npm:@types/node@*": "22.5.4",
     "npm:ai@^4.1.9": "4.1.9",
     "npm:hono@^4.6.19": "4.6.19",
@@ -26,6 +27,9 @@
     },
     "@std/async@1.0.10": {
       "integrity": "2ff1b1c7d33d1416159989b0f69e59ec7ee8cb58510df01e454def2108b3dbec"
+    },
+    "@std/dotenv@0.225.3": {
+      "integrity": "a95e5b812c27b0854c52acbae215856d9cce9d4bbf774d938c51d212711e8d4a"
     },
     "@std/internal@1.0.5": {
       "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
@@ -107,12 +111,6 @@
     },
     "@opentelemetry/api@1.9.0": {
       "integrity": "sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg=="
-    },
-    "@t3-oss/env-core@0.12.0_zod@3.24.1": {
-      "integrity": "sha512-lOPj8d9nJJTt81mMuN9GMk8x5veOt7q9m11OSnCBJhwp1QrL/qR+M8Y467ULBSm9SunosryWNbmQQbgoiMgcdw==",
-      "dependencies": [
-        "zod"
-      ]
     },
     "@types/diff-match-patch@1.0.36": {
       "integrity": "sha512-xFdR6tkm0MWvBfO8xXCSsinYxHcqkQUlcHeSpMC2ukzOb6lwQAfDmW+Qt0AvlGd8HpsS28qKsB+oPeJn9I39jg=="
@@ -219,11 +217,11 @@
   "workspace": {
     "dependencies": [
       "jsr:@std/assert@1",
+      "jsr:@std/dotenv@~0.225.3",
       "npm:@ai-sdk/anthropic@^1.1.5",
       "npm:@ai-sdk/google@^1.1.6",
       "npm:@ai-sdk/openai@^1.1.5",
       "npm:@hono/zod-validator@~0.4.2",
-      "npm:@t3-oss/env-core@0.12",
       "npm:ai@^4.1.9",
       "npm:hono@^4.6.19",
       "npm:ollama-ai-provider@^1.2.0",
