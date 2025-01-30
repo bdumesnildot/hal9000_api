@@ -1,25 +1,24 @@
 import { Hono } from "hono"
 import { streamText as honoStreamText } from "hono/streaming"
 import { generateObject, generateText, streamText } from "ai"
-import { getOllamaModel } from "../../lib/ollama/index.ts"
 import {
   postCounterInputSchema,
   postFileInputSchema,
   postFileOutputSchema,
   postPromptInputSchema,
   postRecipeOutputSchema,
-} from "./llm.schema.ts"
+} from "./poc.schema.ts"
 import { zValidator } from "@hono/zod-validator"
-import { getGoogleGenerativeModel } from "../../lib/google/index.ts"
+import { getAiModel } from "../../lib/ai-models/index.ts"
 
-export const chatbotApp = new Hono()
+const app = new Hono()
   .get("/hello", (ctx) => {
     return ctx.text("Hello, chatbot!")
   })
 
   .get("/joke", (ctx) => {
     const { textStream } = streamText({
-      model: getOllamaModel("llama2:13b"),
+      model: getAiModel("ollama", "llama2:13b"),
       prompt: "Tell me a web dev joke",
     })
 
@@ -34,7 +33,7 @@ export const chatbotApp = new Hono()
     const { messages } = ctx.req.valid("json")
 
     const result = await generateText({
-      model: getOllamaModel("llama2:13b"),
+      model: getAiModel("ollama", "llama2:13b"),
       messages,
     })
 
@@ -55,7 +54,7 @@ export const chatbotApp = new Hono()
       const { prompt } = ctx.req.valid("json")
 
       const { object } = await generateObject({
-        model: getOllamaModel("llama3.2:latest"),
+        model: getAiModel("ollama", "llama3.2:latest"),
         system:
           `You are helping a user create a recipe. ` +
           `Use British English variants of ingredient names, like Coriander over Cilantro.`,
@@ -84,7 +83,7 @@ export const chatbotApp = new Hono()
         const { prompt } = ctx.req.valid("json")
 
         const { object } = await generateObject({
-          model: getOllamaModel("llama2:13b"),
+          model: getAiModel("ollama", "llama2:13b"),
           output: "enum",
           enum: ["positive", "negative", "neutral"],
           system:
@@ -119,18 +118,21 @@ export const chatbotApp = new Hono()
       })
 
       const { object } = await generateObject({
-        model: getGoogleGenerativeModel("gemini-1.5-flash"),
+        model: getAiModel("google", "gemini-1.5-flash"),
         schema: postFileOutputSchema,
-        system: `You will receive an invoice. ` +
-              `Please extract the data from the invoice.` +
-              `Add all the information you may find relevant.`,
+        system:
+          `You will receive an invoice. ` +
+          `Please extract the data from the invoice.` +
+          `Add all the information you may find relevant.`,
         messages: [
           {
             role: "user",
-            content: [{
-              type: "text",
-              text: "Please make a description of the following pdf file"
-            }]
+            content: [
+              {
+                type: "text",
+                text: "Please make a description of the following pdf file",
+              },
+            ],
           },
           {
             role: "user",
@@ -145,7 +147,7 @@ export const chatbotApp = new Hono()
         ],
       })
 
-      console.log('object', object)
+      console.log("object", object)
 
       return ctx.json(object)
     } catch (e) {
@@ -153,9 +155,11 @@ export const chatbotApp = new Hono()
       return ctx.json(
         {
           message: "Internal server error",
-          error: e
+          error: e,
         },
         500
       )
     }
   })
+
+export default app

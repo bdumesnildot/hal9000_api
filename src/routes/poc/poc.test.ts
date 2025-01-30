@@ -8,18 +8,18 @@ import {
   postRecipeOutputSchema,
   type PostCounterInput,
   type PostPromptInput,
-} from "./llm.schema.ts"
+} from "./poc.schema.ts"
 
 const server = createServer()
 
 Deno.test("Get chatbot/hello", async () => {
-  const res = await server.request("/api/chatbot/hello", {
+  const res = await server.request("/api/poc/hello", {
     method: "GET",
   })
   assertEquals(res.status, 200)
 })
 
-Deno.test("Post chatbot/counter", async () => {
+Deno.test("Post poc/counter", async () => {
   const body: PostCounterInput = {
     messages: [
       {
@@ -42,7 +42,7 @@ Deno.test("Post chatbot/counter", async () => {
     ],
   }
 
-  const res = await server.request("/api/chatbot/counter", {
+  const res = await server.request("/api/poc/counter", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -54,12 +54,12 @@ Deno.test("Post chatbot/counter", async () => {
   assertMatch(result, /12/)
 })
 
-Deno.test("Post chatbot/recipe", async () => {
+Deno.test("Post poc/recipe", async () => {
   const body: PostPromptInput = {
     prompt: "How to make baba ganoush?",
   }
 
-  const res = await server.request("/api/chatbot/recipe", {
+  const res = await server.request("/api/poc/recipe", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),

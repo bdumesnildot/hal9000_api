@@ -2,8 +2,8 @@ import { Hono } from "hono"
 import { logger } from "hono/logger"
 import { prettyJSON } from 'hono/pretty-json'
 import { bearerAuth } from "hono/bearer-auth"
-import { chatbotApp } from "./modules/llm/llm.app.ts"
 import { env } from "./env.ts"
+import pocApp from "./routes/poc/poc.routes.ts"
 
 export const createServer = () => {
   const server = new Hono().basePath("/api")
@@ -26,16 +26,15 @@ export const createServer = () => {
    * Routes
    */
   server.get("/", (ctx) => {
-    return ctx.text("I'm sorry, Dave. I'm afraid I can't do that.")
+    return ctx.text("I am fully operational and all my circuits are functioning perfectly.")
   })
-  // apps
-  server.route("/llm", chatbotApp)
+  server.route("/poc", pocApp)
 
   /**
    * Default handler
    */
   server.notFound((c) => {
-    return c.text("404 Not found", 404)
+    return c.text("I'm sorry, Dave. I'm afraid I can't do that.", 404)
   })
 
   return server
